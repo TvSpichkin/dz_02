@@ -1,15 +1,18 @@
 {
-  "name": "dz-01",
+  "name": "dz-02",
   "version": "1.0.0",
-  "main": "ист/индекс.ts",
-  "author": "Extro-Games",
+  "main": "src/index.ts",
+  "author": "TvSpichkin",
   "license": "MIT",
   "scripts": {
+    "watch": "tsc -w",
     "смотр": "tsc -w",
-    "раз": "nodemon --inspect двф/индекс.js",
+    "dev": "nodemon --inspect bin/index.js",
+    "раз": "nodemon --inspect bin/index.js",
+    "test": "jest",
     "тест": "jest",
     "build": "tsc",
-    "start": "node двф/индекс.js"
+    "start": "node bin/index.js"
   },
   "dependencies": {
     "express": "^4.19.2"

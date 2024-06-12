@@ -1,16 +1,16 @@
 {
   "version": 2,
-  "name": "dz-01",
+  "name": "dz-02",
   "builds": [
     {
-      "src": "ист/индекс.ts",
+      "src": "src/index.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "ист/индекс.ts"
+      "dest": "bin/index.js"
     }
   ]
 }
