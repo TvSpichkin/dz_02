@@ -1,9 +1,7 @@
 import {app} from "./app";
-
-const //МП = "127.0.0.1", // Адрес межсетевого протокола (МП)
-порт = process.env.PORT || 3e3; // Порт, прослушиваемый сервером
+import {SET} from "./settings";
 
 
-app.listen(порт, () => {
-    console.log("Сервер доступен по адресу " + "МП" + " и случшает порт " + порт);
+app.listen(SET.PORT, () => {
+    console.log("Сервер доступен по адресу " + "МП" + " и случшает порт " + SET.PORT);
 });
