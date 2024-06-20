@@ -1,6 +1,6 @@
-import экспресс, {Request, Response} from "express";
+import express, {Request, Response} from "express";
 
-export const app = экспресс(); // Определение экспресс приложения
+export const app = express(); // Определение экспресс приложения
 
 
 app.get("/", (запр: Request, отв: Response) => {
