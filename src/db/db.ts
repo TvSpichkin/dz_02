@@ -15,3 +15,13 @@ export const db: DBType = {
     }], // Тестовое заполнение сетевых журналов
     //posts: []
 }; // Создаём базу данных (пока это просто JS-структура)
+
+export function setDB(dataset?: DBType) {
+    if(!dataset) { // Если в функцию ничего не передано - то очищаем базу данных
+        db.blogs = []; // Отчистка массива сетевых журналов
+        //db.posts = [];
+    } else { // Если что-то передано - то заменяем старые значения новыми
+        db.blogs = dataset.blogs.map(b => ({...b}));
+        //db.posts = dataset.posts.map(p => ({...p}));
+    }
+}
