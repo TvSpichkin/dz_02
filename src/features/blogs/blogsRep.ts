@@ -7,6 +7,9 @@ export const blogsRep = {
     getAll() {
         return db.blogs.map(this.maper);
     }, // Извлечение сетевых журналов
+    find(id: string) {
+        return db.blogs.find(b => String(b.id) === id);
+    },
     maper(blog: BlogDbType) {
         const blogForOutput: BlogViewModel = {
             id: String(blog.id),

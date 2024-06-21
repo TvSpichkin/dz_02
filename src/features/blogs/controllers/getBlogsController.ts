@@ -3,6 +3,6 @@ import {BlogViewModel} from "../../../IOtypes/blogsTypes";
 import {blogsRep} from "../blogsRep";
 
 
-export function getBlogsController(запр: Request, отв: Response<BlogViewModel[]>) {
-    отв.json(blogsRep.getAll()); // Получение сетевых журналов
+export function getBlogsController(req: Request, res: Response<BlogViewModel[]>) {
+    res.json(blogsRep.getAll()); // Получение сетевых журналов
 }; // Контролёр, отвечающий за выдачу сетевых журналов
