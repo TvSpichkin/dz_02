@@ -5,6 +5,6 @@ export const SET = {
         BLOGS: '/blogs',
         POSTS: '/posts',
         TESTING: '/testing',
-    }
+    } // Пути ресурсов
 
 }; // Определение частоиспользуемых констант

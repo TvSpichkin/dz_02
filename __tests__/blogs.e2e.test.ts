@@ -5,7 +5,7 @@ import {SET} from "../src/settings";
 
 describe("/blogs", () => {
     beforeAll(async () => {
-        setDB();
+        setDB(); // Очистка базы данных перед началом тестирования
     });
     
     it("должен вернуть 200 и пустой массив", async () => {

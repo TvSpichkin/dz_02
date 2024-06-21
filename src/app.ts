@@ -9,4 +9,4 @@ app.get("/", (запр: Request, отв: Response) => {
     отв.send("Servak rabotaet");
 }); // Проверка успешного запуска сервера
 
-app.use(SET.PATH.BLOGS, blogsRout)
+app.use(SET.PATH.BLOGS, blogsRout) // Подключение маршрутизатора сетевых журналов

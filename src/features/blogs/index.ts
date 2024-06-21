@@ -2,6 +2,6 @@ import express from "express";
 import {getBlogsController} from "./controllers/getBlogsController";
 
 
-export const blogsRout = express.Router();
+export const blogsRout = express.Router(); // Объявление маршрутизатора сетевых журналов
 
-blogsRout.get("/", getBlogsController);
+blogsRout.get("/", getBlogsController); // Возврат всех сетевых журналов
