@@ -1,26 +1,8 @@
-import экспресс, {Response} from "express";
-import {ЗапросСПарами, ЗапросСТелом, ЗапросСВопросом, ЗапросСПарамиИТелом} from "./типы";
-import {типВидео, МодельВидаВидео, МодельЗапросаВидео, МодельУИРПарамовИдВидео, МодельСозданияВидео, МодельОбновленияВидео} from "./схемы";
-import {провВводаСозданияВидео, провВводаОбновленияВидео} from "./проверка";
-import {бдВвид} from "./конвертер";
-import {бд} from "./бд";
-
-export const пр = экспресс(); // Определение экспресс приложения
-export const путь = {
-    //осн: encodeURI("/hometask_01/api"),
-    видео: encodeURI("/videos"),
-    тест: encodeURI("/testing/all-data")
-};
-//путь.видео = путь.осн + путь.видео;
-//путь.тест = путь.осн + путь.тест;
-
-const промежПОтелаЗОДС = экспресс.json();
-пр.use(промежПОтелаЗОДС);
+import {Request, Response} from "express";
+import {BlogViewModel} from "../../../IOtypes/blogsTypes";
+import {blogsRep} from "../blogsRep";
 
 
-export const getBlogsController = (запр: ЗапросСВопросом<МодельЗапросаВидео>, отв: Response<BlogViewModel[]>) => {
-    var найдВидео = бд.видео;
-    if(запр.query.title) найдВидео = найдВидео.filter(в => в.название.indexOf(запр.query.title) > -1);
-
-    отв.json(найдВидео.map(бдВвид));
-};
+export const getBlogsController = (запр: Request, отв: Response<BlogViewModel[]>) => {
+    отв.json(blogsRep.getAll()); // Получение сетевых журналов
+}; // Контролёр, отвечающий за выдачу сетевых журналов
