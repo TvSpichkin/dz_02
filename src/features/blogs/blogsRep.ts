@@ -9,7 +9,7 @@ export const blogsRep = {
     }, // Извлечение сетевых журналов
     maper(blog: BlogDbType) {
         const blogForOutput: BlogViewModel = {
-            id: blog.id,
+            id: String(blog.id),
             name: blog.name,
             description: blog.description,
             websiteUrl: blog.websiteUrl
