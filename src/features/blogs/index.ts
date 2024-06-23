@@ -1,10 +1,11 @@
 import express from "express";
 import {getBlogsController} from "./controllers/getBlogsController";
-import {findBlogValidator} from "./middlewares/blogValidators";
+import {findBlogValidator, blogValidators} from "./middlewares/blogValidators";
 import {findBlogController} from "./controllers/findBlogController";
 
 
-export const blogsRout = express.Router(); // Объявление маршрутизатора сетевых журналов
+export const blogsRout = express.Router(); // РћР±СЉСЏРІР»РµРЅРёРµ РјР°СЂС€СЂСѓС‚РёР·Р°С‚РѕСЂР° СЃРµС‚РµРІС‹С… Р¶СѓСЂРЅР°Р»РѕРІ
 
-blogsRout.get("/", getBlogsController); // Возврат всех сетевых журналов
-blogsRout.get("/:id", findBlogValidator, findBlogController); // Возврат сетевого журнала по идентификатору
+blogsRout.get("/", getBlogsController); // Р’РѕР·РІСЂР°С‚ РІСЃРµС… СЃРµС‚РµРІС‹С… Р¶СѓСЂРЅР°Р»РѕРІ
+blogsRout.get("/:id", findBlogValidator, findBlogController); // Р’РѕР·РІСЂР°С‚ СЃРµС‚РµРІРѕРіРѕ Р¶СѓСЂРЅР°Р»Р° РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
+blogsRout.post('/', ...blogValidators/*, createBlogController*/); // РЎРѕР·РґР°РЅРёРµ СЃРµС‚РµРІРѕРіРѕ Р¶СѓСЂРЅР°Р»Р°

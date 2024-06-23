@@ -1,5 +1,6 @@
 import {Request, Response, NextFunction} from "express";
 import {blogsRep} from "../blogsRep";
+import {adminMiddleware} from "../../../globalMiddlewares/adminMiddleware";
 
 
 export function findBlogValidator(req: Request<{id: string}>, res: Response, next: NextFunction) {
@@ -11,3 +12,13 @@ export function findBlogValidator(req: Request<{id: string}>, res: Response, nex
         next(); // И передача управления дальше
     }
 } // Проверка существования искомого сетевого журнала
+
+export const blogValidators = [
+    adminMiddleware,
+
+    // nameValidator,
+    //descriptionValidator,
+    //websiteUrlValidator,
+
+    //inputCheckErrorsMiddleware,
+]; // Набор проверок для создания и изменения сетевых журналов
