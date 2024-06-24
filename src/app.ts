@@ -6,6 +6,7 @@ export const app = express(); // Определение экспресс при�
 
 
 app.get("/", (запр: Request, отв: Response) => {
+    //console.log("pass = '" + SET.ADMIN + "'");
     отв.send("Servak rabotaet");
 }); // Проверка успешного запуска сервера
 
