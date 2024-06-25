@@ -7,7 +7,7 @@ function fromUTF8ToBase64(code: string) {
 } // Кодирование строки в base64
 
 export function adminMiddleware(req: Request, res: Response, next: NextFunction) {
-    const auth = req.headers["authorization"];
+    const auth = req.headers["authorization"]; // Получение заголовка авторизации из запроса
 
     function unauth() {
         res.sendStatus(401);
