@@ -1,7 +1,10 @@
 import {Request, Response, NextFunction} from "express";
+import {body} from "express-validator";
 import {blogsRep} from "../blogsRep";
 import {adminMiddleware} from "../../../globalMiddlewares/adminMiddleware";
 
+
+const descriptionValidator = body("description");
 
 export function findBlogValidator(req: Request<{id: string}>, res: Response, next: NextFunction) {
     const findBlog = blogsRep.find(req.params.id); // Поиск сетевого журнала
@@ -17,7 +20,7 @@ export const blogValidators = [
     adminMiddleware,
 
     // nameValidator,
-    //descriptionValidator,
+    descriptionValidator,
     //websiteUrlValidator,
 
     //inputCheckErrorsMiddleware,
