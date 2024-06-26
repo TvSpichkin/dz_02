@@ -4,20 +4,20 @@ import {SET} from "../settings";
 
 function fromUTF8ToBase64(code: string) {
     return btoa(unescape(encodeURIComponent("admin:qwerty")));
-} // Кодирование строки в base64
+} // РљРѕРґРёСЂРѕРІР°РЅРёРµ СЃС‚СЂРѕРєРё РІ base64
 
 export function adminMiddleware(req: Request, res: Response, next: NextFunction) {
-    const auth = req.headers["authorization"]; // Получение заголовка авторизации из запроса
+    const auth = req.headers["authorization"]; // РџРѕР»СѓС‡РµРЅРёРµ Р·Р°РіРѕР»РѕРІРєР° Р°РІС‚РѕСЂРёР·Р°С†РёРё РёР· Р·Р°РїСЂРѕСЃР°
 
     function unauth() {
         res.sendStatus(401);
-    } // Отправка статуса ошибки о попытке несанкционированного доступа
+    } // РћС‚РїСЂР°РІРєР° СЃС‚Р°С‚СѓСЃР° РѕС€РёР±РєРё Рѕ РїРѕРїС‹С‚РєРµ РЅРµСЃР°РЅРєС†РёРѕРЅРёСЂРѕРІР°РЅРЅРѕРіРѕ РґРѕСЃС‚СѓРїР°
 
-    if(!auth || (auth.slice(0, 6) !== "Basic ")) unauth(); // Проверка на базовую авторизацию
+    if(!auth || (auth.slice(0, 6) !== "Basic ")) unauth(); // РџСЂРѕРІРµСЂРєР° РЅР° Р±Р°Р·РѕРІСѓСЋ Р°РІС‚РѕСЂРёР·Р°С†РёСЋ
     else {
-        const codedAuth = fromUTF8ToBase64(SET.ADMIN); // Получение base64 строки авторизации
+        const codedAuth = fromUTF8ToBase64(SET.ADMIN); // РџРѕР»СѓС‡РµРЅРёРµ base64 СЃС‚СЂРѕРєРё Р°РІС‚РѕСЂРёР·Р°С†РёРё
 
-        if(auth.slice(6) !== codedAuth) unauth(); // Сравнение строк base64
-        else next(); // Передача управления дальше
+        if(auth.slice(6) !== codedAuth) unauth(); // РЎСЂР°РІРЅРµРЅРёРµ СЃС‚СЂРѕРє base64
+        else next(); // РџРµСЂРµРґР°С‡Р° СѓРїСЂР°РІР»РµРЅРёСЏ РґР°Р»СЊС€Рµ
     }
 }

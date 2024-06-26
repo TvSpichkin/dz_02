@@ -3,6 +3,7 @@ import {SET} from "./settings";
 import {blogsRout} from "./features/blogs";
 
 export const app = express(); // Определение экспресс приложения
+app.use(express.json()) // Cоздание свойств-объектов тела и вопросов во всех запросах
 
 
 app.get("/", (запр: Request, отв: Response) => {

@@ -4,7 +4,7 @@ import {ReqBody} from "../../../IOtypes/reqTypes";
 import {blogsRep} from "../blogsRep";
 
 
-export function findBlogController(req: ReqBody<BlogInputModel>, res: Response<BlogViewModel>) {
+export function createBlogController(req: ReqBody<BlogInputModel>, res: Response<BlogViewModel>) {
     const newBlog = blogsRep.create(req.body); // Создание сетевого журнала
 
     res.status(201).json(newBlog); // Возврат созданного сетевого журнала
