@@ -15,7 +15,7 @@ export const blogsRep = {
             id: db.blogs.length ? db.blogs[db.blogs.length - 1].id + 1 : 1,
             name: blog.name,
             description: blog.description,
-            websiteUrl: blog.websiteUrl,
+            websiteUrl: blog.websiteUrl
         };
 
         db.blogs.push(newBlog);

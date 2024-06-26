@@ -2,8 +2,8 @@ import {Request, Response, NextFunction} from "express";
 import {SET} from "../settings";
 
 
-function fromUTF8ToBase64(code: string) {
-    return btoa(unescape(encodeURIComponent("admin:qwerty")));
+export function fromUTF8ToBase64(code: string) {
+    return btoa(unescape(encodeURIComponent(code)));
 } // Кодирование строки в base64
 
 export function adminMiddleware(req: Request, res: Response, next: NextFunction) {
