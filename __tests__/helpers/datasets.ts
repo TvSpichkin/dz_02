@@ -1,7 +1,11 @@
 import {agent} from "supertest";
+import {fromUTF8ToBase64} from "../../src/globalMiddlewares/adminMiddleware";
+import {SET} from "../../src/settings";
 import {app} from "../../src/app";
 import {BlogInputModel} from "../../src/IOtypes/blogsTypes";
 
+
+export const codedAuth = fromUTF8ToBase64(SET.ADMIN); // Получение base64 строки авторизации
 
 export const corrBlog1: BlogInputModel = {
     name: 'Василий',

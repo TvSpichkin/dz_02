@@ -1,7 +1,7 @@
 import {req, getBlog, postBlog} from "./helpers/test-helpers";
 import {setDB} from "../src/db/db";
 import {SET} from "../src/settings";
-import {corrBlog1} from "./helpers/datasets";
+import {codedAuth, corrBlog1} from "./helpers/datasets";
 
 
 describe("/blogs", () => {
@@ -18,24 +18,25 @@ describe("/blogs", () => {
         await req.get(SET.PATH.BLOGS + "/-1").expect(404);
     });
 
-    it("не должен создать сетевой журнал без авторизации", async () => {
+    it("не должен создать сетевой журнал без авторизации и должен вернуть 401", async () => {
         await req.post(SET.PATH.BLOGS).send(corrBlog1).expect(401);
+        await req.post(SET.PATH.BLOGS).set({"Authorization": "Basic cisaB"}).send(corrBlog1).expect(401);
         await getBlog.expect(200, []);
     });
 
-    /*it("не должен создать сетевой журнал c неправильными входными данными", async () => {
-        const blog = corrBlog1;
+    it("не должен создать сетевой журнал c неправильными входными данными", async () => {
+        //const blog = corrBlog1;
 
-        await postBlog.expect(400);
+        await req.post(SET.PATH.BLOGS).set({"Authorization": "Basic " + codedAuth}).expect(400);
         await getBlog.expect(200, []);
 
-        await postBlog.send().expect(400);
+        /*await postBlog.send().expect(400);
         await getBlog.expect(200, []);
 
         await postBlog.send({название: 0}).expect(400);
         await getBlog.expect(200, []);
 
-        await postBlog.send({...blog, title: undefined}).expect(400);
+        /*await postBlog.send({...blog, title: undefined}).expect(400);
         await postBlog.send({...blog, title: 0}).expect(400);
         await postBlog.send({...blog, title: "qwertyuiop[]asdfghjkl;'zxcvbnm,./12345678"}).expect(400);
         await postBlog.send({...blog, title: "    "}).expect(400);
@@ -52,6 +53,6 @@ describe("/blogs", () => {
         await postBlog.send({...blog, availableResolutions: []}).expect(400);
         await postBlog.send({...blog, availableResolutions: [0]}).expect(400);
         await postBlog.send({...blog, availableResolutions: ["0"]}).expect(400);
-        await getBlog.expect(200, []);
-    });*/
+        await getBlog.expect(200, []);*/
+    });
 });
