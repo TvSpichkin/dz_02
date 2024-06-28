@@ -1,7 +1,7 @@
-import {req, getBlog, postBlog} from "./helpers/test-helpers";
+import {req, getBlog} from "./helpers/test-helpers";
 import {setDB} from "../src/db/db";
 import {SET} from "../src/settings";
-import {codedAuth, corrBlog1} from "./helpers/datasets";
+import {auth, bigStr, corrBlog1} from "./helpers/datasets";
 
 
 describe("/blogs", () => {
@@ -25,34 +25,33 @@ describe("/blogs", () => {
     });
 
     it("не должен создать сетевой журнал c неправильными входными данными", async () => {
-        //const blog = corrBlog1;
+        const blog = corrBlog1;
 
-        await req.post(SET.PATH.BLOGS).set({"Authorization": "Basic " + codedAuth}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).expect(400);
         await getBlog.expect(200, []);
 
-        /*await postBlog.send().expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send().expect(400);
         await getBlog.expect(200, []);
 
-        await postBlog.send({название: 0}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({название: 0}).expect(400);
         await getBlog.expect(200, []);
 
-        /*await postBlog.send({...blog, title: undefined}).expect(400);
-        await postBlog.send({...blog, title: 0}).expect(400);
-        await postBlog.send({...blog, title: "qwertyuiop[]asdfghjkl;'zxcvbnm,./12345678"}).expect(400);
-        await postBlog.send({...blog, title: "    "}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, name: undefined}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, name: 0}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, name: bigStr(16)}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, name: "    "}).expect(400);
         await getBlog.expect(200, []);
 
-        await postBlog.send({...blog, author: undefined}).expect(400);
-        await postBlog.send({...blog, author: 0}).expect(400);
-        await postBlog.send({...blog, author: "qwertyuiop[]asdfghjkl"}).expect(400);
-        await postBlog.send({...blog, author: "    "}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, description: undefined}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, description: 0}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, description: bigStr(501)}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, description: "    "}).expect(400);
         await getBlog.expect(200, []);
 
-        await postBlog.send({...blog, availableResolutions: undefined}).expect(400);
-        await postBlog.send({...blog, availableResolutions: 0}).expect(400);
-        await postBlog.send({...blog, availableResolutions: []}).expect(400);
-        await postBlog.send({...blog, availableResolutions: [0]}).expect(400);
-        await postBlog.send({...blog, availableResolutions: ["0"]}).expect(400);
-        await getBlog.expect(200, []);*/
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, websiteUrl: undefined}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, websiteUrl: 0}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, websiteUrl: bigStr(101)}).expect(400);
+        await req.post(SET.PATH.BLOGS).set(auth).send({...blog, websiteUrl: "    "}).expect(400);
+        await getBlog.expect(200, []);
     });
 });
