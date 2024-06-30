@@ -1,3 +1,9 @@
+export type BlogIdModel = {
+    /**
+     * Идентификатор существующего сетевого журнала
+     */
+    id: string
+};
 export type BlogInputModel = {
     name: string, // Имя; максимальная длина: 15
     description: string, // Описание; максимальная длина: 500

@@ -10,6 +10,10 @@ export const blogsRep = {
     find(id: string) {
         return db.blogs.find(b => String(b.id) === id);
     }, // Извлечение сетевого журнала по идентификатору
+    findAndMap(id: string) {
+        const blog = this.find(id)!; //! Этот метод используется после проверки существования
+        return this.maper(blog);
+    }, // Извлечение и конвертация сетевого журнала
     create(blog: BlogInputModel) {
         const newBlog: BlogDbType = {
             id: db.blogs.length ? db.blogs[db.blogs.length - 1].id + 1 : 1,
@@ -22,6 +26,13 @@ export const blogsRep = {
 
         return this.maper(newBlog);
     }, // Запись сетевого журнала в БД
+    put(blog: BlogInputModel, id: string) {
+        const findBlog: BlogDbType = this.find(id)!; //! Этот метод используется после проверки существования
+
+        findBlog.name = blog.name;
+        findBlog.description = blog.description;
+        findBlog.websiteUrl = blog.websiteUrl;
+    }, // Изменение сетевого журнала в БД
     maper(blog: BlogDbType) {
         const blogForOutput: BlogViewModel = {
             id: String(blog.id),

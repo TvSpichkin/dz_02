@@ -3,6 +3,7 @@ import {getBlogsController} from "./controllers/getBlogsController";
 import {findBlogValidator, blogValidators} from "./middlewares/blogValidators";
 import {findBlogController} from "./controllers/findBlogController";
 import {createBlogController} from "./controllers/createBlogController";
+import {putBlogController} from "./controllers/putBlogController";
 
 
 export const blogsRout = express.Router(); // Объявление маршрутизатора сетевых журналов
@@ -10,3 +11,4 @@ export const blogsRout = express.Router(); // Объявление маршру�
 blogsRout.get("/", getBlogsController); // Возврат всех сетевых журналов
 blogsRout.get("/:id", findBlogValidator, findBlogController); // Возврат сетевого журнала по идентификатору
 blogsRout.post('/', ...blogValidators, createBlogController); // Создание сетевого журнала
+blogsRout.put('/:id', findBlogValidator, ...blogValidators, putBlogController); // Изменение сетевого журнала

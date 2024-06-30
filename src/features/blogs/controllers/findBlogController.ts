@@ -1,9 +1,9 @@
 import {Response} from "express";
-import {BlogViewModel} from "../../../IOtypes/blogsTypes";
+import {BlogIdModel, BlogViewModel} from "../../../IOtypes/blogsTypes";
 import {ReqParam} from "../../../IOtypes/reqTypes";
+import { blogsRep } from "../blogsRep";
 
 
-export function findBlogController(req: ReqParam<{id: string}>, res: Response<BlogViewModel>) {
-    // @ts-ignore
-    res.json(res.find); // Получение искомого сетевого журнала
+export function findBlogController(req: ReqParam<BlogIdModel>, res: Response<BlogViewModel>) {
+    res.json(blogsRep.findAndMap(req.params.id)); // Получение искомого сетевого журнала
 }; // Контролёр, отвечающий за выдачу искомого сетевого журнала
