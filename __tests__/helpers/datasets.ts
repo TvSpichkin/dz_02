@@ -6,10 +6,14 @@ import {BlogInputModel} from "../../src/IOtypes/blogsTypes";
 export const auth = {"Authorization": "Basic " + fromUTF8ToBase64(SET.ADMIN)}; // Получение base64 строки авторизации
 
 export const corrBlog1: BlogInputModel = {
-    name: 'Василий',
-    description: 'Тёркин',
-    websiteUrl: 'https://_vas-i1.ter/k_/-i/4/'
-} as const; // Правильный входной сетевой журнал
+    name: "Василий",
+    description: "Тёркин",
+    websiteUrl: "https://_vas-i1.ter/k_/-i/4/"
+} as const, corrBlog2: BlogInputModel = {
+    name: "Максим",
+    description: "Так так так",
+    websiteUrl: "https://maksima.dva/teski"
+} as const; // Правильные входные сетевые журналы
 
 export function createBlog(n: string, d: string, w: string): BlogInputModel {
     return {
