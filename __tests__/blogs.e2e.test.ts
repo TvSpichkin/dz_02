@@ -90,4 +90,58 @@ describe("/blogs", () => {
         await req.get(SET.PATH.BLOGS + "/1").expect(200, blog1);
         await req.get(SET.PATH.BLOGS + "/2").expect(200, blog2);
     });
+
+    it("не должен обновить сетевой журнал без авторизации и должен вернуть 401", async () => {
+        await req.put(SET.PATH.BLOGS + "/1").send(corrBlog2).expect(401);
+        await req.put(SET.PATH.BLOGS + "/1").set({"Auth": "Basic cisaB"}).send(corrBlog2).expect(401);
+        await req.put(SET.PATH.BLOGS + "/1").set({"Authorization": "Vazic cisaB"}).send(corrBlog2).expect(401);
+        await req.put(SET.PATH.BLOGS + "/1").set({"Authorization": "Basic cisaB"}).send(corrBlog2).expect(401);
+        await req.get(SET.PATH.BLOGS + "/1").expect(200, blog1);
+    });
+
+    it("не должен обновить сетевые журналы c неправильными входными данными", async () => {
+        await req.put(SET.PATH.BLOGS + "/1").set(auth).expect(400);
+        await req.get(SET.PATH.BLOGS + "/1").expect(200, blog1);
+
+        /*await запрос(пр).put(путь.видео + "/0").send().expect(400);
+        await запрос(пр).get(путь.видео + "/0").expect(200, созданноеВидео1);
+
+        await запрос(пр).put(путь.видео + "/0").send({название: 0}).expect(400);
+        await запрос(пр).get(путь.видео + "/0").expect(200, созданноеВидео1);
+
+        await запрос(пр).put(путь.видео + "/0").send({...видео, title: undefined}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, title: 0}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, title: "абвгдеёжзийклмнопрстуфхцчшщъыьэюя01234567"}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, title: "    "}).expect(400);
+        await запрос(пр).get(путь.видео + "/0").expect(200, созданноеВидео1);
+
+        await запрос(пр).put(путь.видео + "/0").send({...видео, author: undefined}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, author: 0}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, author: "абвгдеёжзийклмнопрсту"}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, author: "    "}).expect(400);
+        await запрос(пр).get(путь.видео + "/0").expect(200, созданноеВидео1);
+
+        await запрос(пр).put(путь.видео + "/0").send({...видео, availableResolutions: undefined}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, availableResolutions: 0}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, availableResolutions: []}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, availableResolutions: [0]}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, availableResolutions: ["0"]}).expect(400);
+        await запрос(пр).get(путь.видео + "/0").expect(200, созданноеВидео1);
+
+        await запрос(пр).put(путь.видео + "/0").send({...видео, canBeDownloaded: undefined}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, canBeDownloaded: 0}).expect(400);
+        await запрос(пр).get(путь.видео + "/0").expect(200, созданноеВидео1);
+
+        await запрос(пр).put(путь.видео + "/0").send({...видео, minAgeRestriction: undefined}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, minAgeRestriction: "0"}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, minAgeRestriction: 1.5}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, minAgeRestriction: 19}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, minAgeRestriction: 0}).expect(400);
+        await запрос(пр).get(путь.видео + "/0").expect(200, созданноеВидео1);
+
+        await запрос(пр).put(путь.видео + "/0").send({...видео, publicationDate: undefined}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, publicationDate: 0}).expect(400);
+        await запрос(пр).put(путь.видео + "/0").send({...видео, publicationDate: "ё"}).expect(400);
+        await запрос(пр).get(путь.видео + "/0").expect(200, созданноеВидео1);*/
+    });
 });
