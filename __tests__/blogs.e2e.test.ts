@@ -1,7 +1,7 @@
 import {req, getBlog} from "./helpers/test-helpers";
 import {setDB} from "../src/db/db";
 import {SET} from "../src/settings";
-import {auth, bigStr, corrBlog1, corrBlog2} from "./helpers/datasets";
+import {auth, bigStr, corrBlog1, corrBlog2, corrBlog3} from "./helpers/datasets";
 import {BlogViewModel} from "../src/IOtypes/blogsTypes";
 
 
@@ -138,5 +138,13 @@ describe("/blogs", () => {
 
     it("не должен обновить несуществующий сетевой журнал", async () => {
         await req.put(SET.PATH.BLOGS + "/-1").set(auth).send(corrBlog2).expect(404);
+    });
+
+    it("должен обновить сетевой журнал c правильными входными данными", async () => {
+        const blog = corrBlog3;
+        blog1 = {...blog1, ...blog};
+        await req.put(SET.PATH.BLOGS + "/1").set(auth).send(blog).expect(204);
+        await req.get(SET.PATH.BLOGS + "/1").expect(200, blog1);
+        await req.get(SET.PATH.BLOGS + "/2").expect(200, blog2);
     });
 });
