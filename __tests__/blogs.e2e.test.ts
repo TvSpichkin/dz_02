@@ -147,4 +147,23 @@ describe("/blogs", () => {
         await req.get(SET.PATH.BLOGS + "/1").expect(200, blog1);
         await req.get(SET.PATH.BLOGS + "/2").expect(200, blog2);
     });
+
+    it("не должен удалить сетевой журнал без авторизации и должен вернуть 401", async () => {
+        await req.delete(SET.PATH.BLOGS + "/1").expect(401);
+        await req.delete(SET.PATH.BLOGS + "/1").set({"Auth": "Basic cisaB"}).expect(401);
+        await req.delete(SET.PATH.BLOGS + "/1").set({"Authorization": "Vazic cisaB"}).expect(401);
+        await req.delete(SET.PATH.BLOGS + "/1").set({"Authorization": "Basic cisaB"}).expect(401);
+        await req.get(SET.PATH.BLOGS + "/1").expect(200, blog1);
+    });
+
+    it("не должен удалить несуществующий сетевой журнал", async () => {
+        await req.delete(SET.PATH.BLOGS + "/-1").set(auth).expect(404);
+    });
+
+    it("должен удалить существующий сетевой журнал", async () => {
+        await req.delete(SET.PATH.BLOGS + "/1").set(auth).expect(204);
+        await req.delete(SET.PATH.BLOGS + "/2").set(auth).expect(204);
+
+        await getBlog.expect(200, []);
+    });
 });
