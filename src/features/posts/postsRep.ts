@@ -9,7 +9,7 @@ export const postsRep = {
         return db.posts.map(this.maper);
     }, // Извлечение всех записей
     find(id: string) {
-        return db.posts.find(b => String(b.id) === id);
+        return db.posts.find(p => String(p.id) === id);
     }, // Извлечение записи по идентификатору
     findAndMap(id: string) {
         const post = this.find(id)!; //! Этот метод используется после проверки существования
@@ -29,7 +29,7 @@ export const postsRep = {
         return this.maper(newPost);
     }, // Запись записи в БД
     del(id: string) {
-        db.posts = db.posts.filter(b => b.id !== +id);
+        db.posts = db.posts.filter(p => p.id !== +id);
     }, // Удаление записи в БД
     put(post: PostInputModel, id: string) {
         const findPost: PostDbType = this.find(id)!; //! Этот метод используется после проверки существования

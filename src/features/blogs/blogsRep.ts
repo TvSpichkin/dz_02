@@ -28,7 +28,8 @@ export const blogsRep = {
     }, // Запись сетевого журнала в БД
     del(id: string) {
         db.blogs = db.blogs.filter(b => b.id !== +id);
-    }, // Удаление сетевого журнала в БД
+        db.posts = db.posts.filter(p => p.blogId !== +id);
+    }, // Удаление сетевого журнала и всех его записей в БД
     put(blog: BlogInputModel, id: string) {
         const findBlog: BlogDbType = this.find(id)!; //! Этот метод используется после проверки существования
 
