@@ -10,7 +10,7 @@ app.use(express.json()) // Cоздание свойств-объектов те�
 
 app.get("/", (запр: Request, отв: Response) => {
     //console.log("pass = '" + SET.ADMIN + "'");
-    отв.send("Servak rabotaet");
+    отв.send("Servak rabotaet: " + SET.PORT);
 }); // Проверка успешного запуска сервера
 
 app.use(SET.PATH.BLOGS, blogsRout) // Подключение маршрутизатора сетевых журналов
